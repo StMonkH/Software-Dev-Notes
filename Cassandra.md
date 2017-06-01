@@ -41,6 +41,5 @@ Cassandra 没有像BigTable或HBase那样选择中心控制节点, 而选择了�
 <br>
 ![Cassandra Ring](http://img2.tuicool.com/fauqimF.png!web)
 <br>
-<br>
 客户端可以
 
