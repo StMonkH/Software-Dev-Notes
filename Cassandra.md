@@ -37,7 +37,7 @@ Cassandra是纯粹意义上的水平扩展. 为给集群添加更多容量, 可�
 <br>
 <br>
 ## Basic Structure
-Cassandra 没有像BigTable或HBase那样选择中心控制节点, 而选择了无中心的架构, 网络中所有节点都是对等的, 构成了一个环, 节点之间通过P2P协议每秒钟交换一次数据, 这样每个节点都拥有其他所有节点的信息,包括位置和状态
+Cassandra 没有像BigTable或HBase那样选择中心控制节点, 而选择了无中心的架构, 网络中所有节点都是对等的, 构成了一个环, 节点之间通过P2P协议每秒钟交换一次数据, 这样每个节点都拥有其他所有节点的信息,包括位置和状态 结构如下图
 <br>
 ![Cassandra Ring](http://img2.tuicool.com/fauqimF.png!web)
 
