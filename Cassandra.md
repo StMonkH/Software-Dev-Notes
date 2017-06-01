@@ -1,4 +1,4 @@
-# Cassandra
+# Cassandra Info Dump
 ## Intro
 Cassandra是一种流行的分布式结构化数据存储方案. Cassandra是一个混合型的非关系的数据库, 类似于Google的BigTable. 其主要功能比Dynamo更丰富. Cassandra最初由Facebook开发, 后转变成开源项目. 它是一个网络社交云计算方面理想的数据库. 以Amazon专有的完全分布式的Dynamo为基础, 结合了BigTable基于Column Family的数据模型. P2P去中心化的存储. 很多方面都可以称为Dynamo 2.0
 <br>
@@ -45,8 +45,17 @@ Cassandra 没有像BigTable或HBase那样选择中心控制节点, 而选择了�
 
 ### Core Components
 __Gossip:__ 点对点的通讯协议, 用来相互交换节点的位置和状态信息. 当一个节点启动时就立即改变本地存储的Gossip信息, 但当节点信息发生变化时需要清洗历史信息, 比如IP变了. 通过Gossip协议, _每个节点定期每秒交换它自己和它已经交换过信息的节点的数据_, 每个被交换的信息都有一个版本号, 这样当有新数据时可以覆盖老数据, 为了保证数据交换的准确性, 所有的节点必须使用同一份集群列表 这样的节点又被称为seed.
-
-
+<br>
+__Partitioner:__ 负责在急群众分配数据,由它来决定由哪些节点放第一份copy, 一般情况会使用Hash来做主键, 将每行数据分不到不同的节点上,以确保集群的可扩展性.
+<br>
+__Replica Placement Strategy:__ 复制策略, 确定哪个节点放置复制数据, 以及复制的份数.
+<br>
+__Snitch:__ _定义一个网络拓扑图, 用来确定如何放置数据, 高效的处理路由请求.(拓扑图又是什么鬼)(而且为什么要叫做Snitch...)_
+__cassandra.yaml:__ 主配置文件, 设置集群的初始化配置, 表的缓存参数, 调优参数和资源使用, 超时设定, 客户端连接, 备份和安全
+<br>
+<br>
+<br>
+http://www.tuicool.com/articles/MjiAR3r
 
 
 
