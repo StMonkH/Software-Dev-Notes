@@ -54,11 +54,14 @@ __Snitch:__ _定义一个网络拓扑图, 用来确定如何放置数据, 高效
 __cassandra.yaml:__ 主配置文件, 设置集群的初始化配置, 表的缓存参数, 调优参数和资源使用, 超时设定, 客户端连接, 备份和安全
 <br>
 <br>
-<br>
-http://www.tuicool.com/articles/MjiAR3r
-
-
-
+### Putting a reqeust
+当写时间发生时, 首先由Commit Log捕获写时间并持久化,保证数据的可靠性. 之后数据也会被写入到内存中, 叫Memtable, 当内存满了之后写入数据文件, 叫SSTable. 它是Log-Structured Storage Table的简称. 如果客户端配置了Consistency Level是ONE, 意味着只要有个一节点写入成功 就由代理节点(Coordinator)返回给客户端写入完成. 当然这中间可能会有其他节点写入失败的情况. Cassandra自己会通过Hinted Handoff或者Read Repair或者Anti-entropy Node Repair方式保证数据最终一致性. 
+<br><br>
+对于多数据中心的写入请求, Cassandra做了优化, 每个数据中心选取一个Coordinator来完成它所在的数据中心的数据复制, 这样客户端连接的节点至于要向数据中心的一个节点转发复制请求即可. 有这个数据中心的Coordinator来完成这个数据中心内的数据复制 
+<br><br>
+Cassandra的存储结构类似LSM树这种结构 不像传统数据一般都使用B+树 存储引擎以追加的方式顺序写入磁盘连续存储数据, 写入是可以并发写入, 不像B+树一样需要加锁, 写入速度非常高, LevelDB, Hbase都是使用类似的存储结构.
+<br><br>
+然后后面写的我就不懂了
 
 
 
